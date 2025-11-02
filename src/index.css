@@ -1,0 +1,109 @@
+/* Tailwind CSS directives - these are processed by PostCSS */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom base styles - minimal to avoid conflicts with Tailwind */
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Reset some default styles that might conflict with Tailwind */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-width: 320px;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* Utility: hide scrollbars but keep scroll functionality */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+/* Slide-up reveal used on WorkProcess columns */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 700ms ease, transform 700ms ease;
+}
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Glitch animation for UI/UX DESIGNER text */
+@keyframes glitch {
+  0% {
+    transform: translate(0, 0);
+    text-shadow: 
+      0 0 0 #ff0000,
+      0 0 0 #00ffff;
+    opacity: 1;
+    filter: skew(0deg);
+  }
+  25% {
+    transform: translate(4px, -2px);
+    text-shadow: 
+      3px 0 0 #ff0000,
+      -3px 0 0 #00ffff;
+    opacity: 0.85;
+    filter: skew(2deg);
+  }
+  50% {
+    transform: translate(-3px, 3px);
+    text-shadow: 
+      2px 0 0 #ff0000,
+      -2px 0 0 #00ffff;
+    opacity: 1;
+    filter: skew(-1deg);
+  }
+  75% {
+    transform: translate(2px, -4px);
+    text-shadow: 
+      4px 0 0 #ff0000,
+      -4px 0 0 #00ffff;
+    opacity: 1;
+    filter: skew(3deg);
+  }
+  100% {
+    transform: translate(0, 0);
+    text-shadow: 
+      0 0 0 #ff0000,
+      0 0 0 #00ffff;
+    opacity: 1;
+    filter: skew(0deg);
+  }
+}
+
+.glitch-active {
+  animation: glitch 0.2s steps(4, end);
+}
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .glitch-active {
+    animation: none;
+  }
+  
+  /* Alternative subtle effect for reduced motion */
+  .glitch-active {
+    opacity: 0.9;
+    transition: opacity 0.1s ease-out;
+  }
+}
