@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 const TransitionEffect: React.FC = () => {
   const [blocks, setBlocks] = useState<Array<{
@@ -25,7 +25,7 @@ const TransitionEffect: React.FC = () => {
           y: Math.random() * 70,
           width: 25 + Math.random() * 35, // 25-60%
           height: 25 + Math.random() * 35, // 25-60%
-          color: Math.random() > 0.5 ? 'black' : 'white',
+          color: (Math.random() > 0.5 ? 'black' : 'white') as 'black' | 'white',
           delay: Math.random() * 1000, // 0-1s delay
         });
       }
