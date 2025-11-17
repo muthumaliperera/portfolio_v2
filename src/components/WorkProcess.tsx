@@ -83,9 +83,9 @@ const WorkProcess: React.FC<WorkProcessProps> = ({
       {/* Full width image below steps - visible on md and above */}
       <div className="hidden md:block w-full mt-8">
         <img
-          src="/images/img2.jpg"
+          src="/images/process.JPG"
           alt="Work Process"
-          className="w-full h-auto object-cover"
+          className="w-full h-auto object-fill"
         />
       </div>
 

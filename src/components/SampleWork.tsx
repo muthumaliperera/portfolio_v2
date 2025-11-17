@@ -6,7 +6,7 @@ type Project = {
   desc: string;
   category: "real" | "samples" | "pitch" | "graphics";
   images: string[]; // placeholder image URLs or paths
-  scroll?: string; // optional image shown as scrollable inside viewer
+  scroll?: string[]; // optional images shown as scrollable inside viewer
 };
 
 type SampleWorkProps = {
@@ -19,51 +19,73 @@ const SAMPLE: Project[] = [
     title: "BrightMinds Academy",
     desc: "Education Institute in Sri Lanka.",
     category: "real",
-    images: [
-      "/images/ins1.svg",
-      "/images/ins2.png",
-      "/images/ins6.gif",
-      "/images/ins4.png",
-      "/images/ins5.png",
-    ],
-    scroll: "/images/insfull.svg",
+    images: ["/images/ins1.svg", "/images/ins6.gif"],
+    scroll: ["/images/insfull.svg"],
   },
   {
     id: "p2",
     title: "Fresh & Blend",
     desc: "Healthy Smoothie Bar in Sri Lanka.",
     category: "real",
-    images: ["/images/fr2.png"],
-    scroll: "/images/fresh & blend full.svg",
+    images: ["/images/fr2.png", "/images/Fresh Blend Co.mp4"],
+    scroll: ["/images/fresh & blend full.svg"],
   },
   {
-    id: "p4",
+    id: "p3",
     title: "ELVYN DENIM",
     desc: "Concept sample screens.",
     category: "samples",
-    images: ["/images/elvyn1.png"],
-    scroll: "/images/elvyn_1440.svg",
+    images: ["/images/elvyn1.png", "/images/ELVYN Denim clothing.mp4"],
+    scroll: ["/images/elvyn_1440.svg"],
+  },
+  {
+    id: "p4",
+    title: "Monument Studios",
+    desc: "Concept sample screens.",
+    category: "samples",
+    images: ["/images/std1.png"],
+    scroll: ["/images/studioscroll1920.svg", "/images/designsystemtemp.svg"],
   },
 ];
 
+// Helper function to check if file is a video
+function isVideo(src: string): boolean {
+  const videoExtensions = [".mp4", ".webm", ".ogg", ".mov"];
+  return videoExtensions.some((ext) => src.toLowerCase().endsWith(ext));
+}
+
 function Card({ p, onOpen }: { p: Project; onOpen: (p: Project) => void }) {
+  const firstMedia = p.images && p.images[0];
+  const isFirstVideo = firstMedia ? isVideo(firstMedia) : false;
+
   return (
     <article
       onClick={() => onOpen(p)}
       className="group cursor-pointer transition flex flex-col"
     >
       <div className="aspect-[16/9] w-full rounded-lg bg-white/10 mb-4 overflow-hidden">
-        {p.images && p.images[0] ? (
-          <img
-            src={p.images[0]}
-            alt={p.title}
-            className="w-full h-full object-cover"
-            onError={(e) => {
-              // Fallback to placeholder if image fails to load
-              const target = e.target as HTMLImageElement;
-              target.src = "/images/placeholders/1.jpg";
-            }}
-          />
+        {firstMedia ? (
+          isFirstVideo ? (
+            <video
+              src={firstMedia}
+              className="w-full h-full object-cover"
+              muted
+              loop
+              autoPlay
+              playsInline
+            />
+          ) : (
+            <img
+              src={firstMedia}
+              alt={p.title}
+              className="w-full h-full object-cover"
+              onError={(e) => {
+                // Fallback to placeholder if image fails to load
+                const target = e.target as HTMLImageElement;
+                target.src = "/images/placeholders/1.jpg";
+              }}
+            />
+          )
         ) : (
           <div className="w-full h-full flex items-center justify-center text-white/50">
             No Image
@@ -86,17 +108,23 @@ function BottomViewer({
 }) {
   const [index, setIndex] = useState(0);
   const open = !!project;
+
+  // Combine regular images and scroll images, filtering out duplicates
   const slides = project
     ? [
         ...project.images,
-        ...(project.scroll && !project.images.includes(project.scroll)
-          ? [project.scroll]
+        ...(project.scroll
+          ? project.scroll.filter(
+              (scrollImg) => !project.images.includes(scrollImg)
+            )
           : []),
       ]
     : [];
+
   const total = slides.length;
   const src = slides[index] ?? "";
-  const isScrollableShowcase = src === project?.scroll;
+  const isScrollableShowcase = project?.scroll?.includes(src) ?? false;
+  const isCurrentVideo = isVideo(src);
 
   // Freeze background scroll when modal is open
   useEffect(() => {
@@ -184,12 +212,36 @@ function BottomViewer({
             <div className="mx-auto flex-1 h-full w-full px-0 sm:px-2 md:px-4 lg:px-6 max-w-none">
               <div
                 className="h-full w-full rounded-2xl bg-black/20 flex items-center justify-center p-2 sm:p-3 relative"
-                onClick={() => !isScrollableShowcase && total > 1 && next()}
-                role={!isScrollableShowcase ? "button" : undefined}
-                aria-label={!isScrollableShowcase ? "Next image" : undefined}
+                onClick={() =>
+                  !isScrollableShowcase &&
+                  !isCurrentVideo &&
+                  total > 1 &&
+                  next()
+                }
+                role={
+                  !isScrollableShowcase && !isCurrentVideo
+                    ? "button"
+                    : undefined
+                }
+                aria-label={
+                  !isScrollableShowcase && !isCurrentVideo
+                    ? "Next image"
+                    : undefined
+                }
               >
                 {src ? (
-                  isScrollableShowcase ? (
+                  isCurrentVideo ? (
+                    <video
+                      src={src}
+                      className="h-full w-auto object-contain bg-black"
+                      controls
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      onClick={(e) => e.stopPropagation()}
+                    />
+                  ) : isScrollableShowcase ? (
                     <div
                       className="h-full w-full overflow-auto rounded-xl"
                       onClick={(e) => e.stopPropagation()}

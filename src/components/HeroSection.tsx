@@ -252,7 +252,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onScrollDown }) => {
             <button
               className="border-2 border-white px-10 py-4 rounded-sm font-afacad text-white hover:bg-white hover:text-black transition-colors duration-300 flex items-center gap-3 text-xl font-semibold pointer-events-auto"
               onClick={() =>
-                window.open("/CV_Wasana Muthumali_Perera_3767.pdf", "_blank")
+                window.open(
+                  "/Wasana Perera - Associate UI Designer_fig.pdf",
+                  "_blank"
+                )
               }
             >
               RESUME
