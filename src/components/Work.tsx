@@ -7,10 +7,30 @@ type WorkProps = {
 };
 
 const projects = [
-  { src: "/images/LB.gif", alt: "LanguageBee" },
-  { src: "/images/SinChin.gif", alt: "SinChin" },
-  { src: "/images/studioProjectss.svg", alt: "Studio Projects" },
-  { src: "/images/GetAJob_ProjectSS.svg", alt: "Get A Job" },
+  {
+    src: "/images/LB.gif",
+    alt: "LanguageBee",
+    linkto: "https://languagebee.ai/",
+    title: "LanguageBee.ai",
+  },
+  {
+    src: "/images/SinChin.gif",
+    alt: "SinChin",
+    title: "SinChin.lk",
+    linkto: "https://sinchin.lk/",
+  },
+  {
+    src: "/images/studioProjectss.svg",
+    alt: "Studio Projects",
+    title: "SOS Studio",
+    linkto: "https://thespaceonestudio.com/",
+  },
+  {
+    src: "/images/GetAJob_ProjectSS.svg",
+    alt: "Get A Job",
+    title: "get-jobai.com",
+    linkto: "https://get-jobai.com/",
+  },
 ];
 
 export default function Work({
@@ -167,21 +187,39 @@ export default function Work({
             style={{ scrollSnapType: "x mandatory" }}
           >
             {projects.map((p) => (
-              <div
-                key={p.src}
-                className="snap-start shrink-0 rounded-2xl overflow-hidden"
-                style={{
-                  width: "min(90vw, 780px)",
-                  height: "min(50.77vw, 420px)",
-                }}
-              >
-                <img
-                  src={p.src}
-                  alt={p.alt}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                  draggable={false}
-                />
+              <div key={p.src} className="snap-start shrink-0">
+                <div
+                  className="rounded-2xl overflow-hidden"
+                  style={{
+                    width: "min(90vw, 780px)",
+                    height: "min(50.77vw, 420px)",
+                  }}
+                >
+                  <img
+                    src={p.src}
+                    alt={p.alt}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                    draggable={false}
+                  />
+                </div>
+                <div className="mt-4">
+                  <a
+                    href={p.linkto}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group"
+                  >
+                    <h3 className="font-agdasima text-2xl sm:text-3xl font-semibold">
+                      {p.title}
+                    </h3>
+                    {p.linkto && (
+                      <span className="font-agdasima text-lg sm:text-xl opacity-70 mt-1 block group-hover:underline">
+                        {p.linkto}
+                      </span>
+                    )}
+                  </a>
+                </div>
               </div>
             ))}
           </div>

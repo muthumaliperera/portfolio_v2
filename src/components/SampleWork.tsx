@@ -27,7 +27,7 @@ const SAMPLE: Project[] = [
     title: "Fresh & Blend",
     desc: "Healthy Smoothie Bar in Sri Lanka.",
     category: "real",
-    images: ["/images/fr2.png", "/images/Fresh Blend Co.mp4"],
+    images: ["/images/fr2.png", "/images/FreshBlendC.gif"],
     scroll: ["/images/fresh & blend full.svg"],
   },
   {
@@ -35,7 +35,7 @@ const SAMPLE: Project[] = [
     title: "ELVYN DENIM",
     desc: "Concept sample screens.",
     category: "samples",
-    images: ["/images/elvyn1.png", "/images/ELVYN Denim clothing.mp4"],
+    images: ["/images/elvyn1.png", "/images/ELVYN.gif"],
     scroll: ["/images/elvyn_1440.svg"],
   },
   {
@@ -43,7 +43,7 @@ const SAMPLE: Project[] = [
     title: "Monument Studios",
     desc: "Concept sample screens.",
     category: "samples",
-    images: ["/images/std1.png"],
+    images: ["/images/std1.png", "/images/MonumentStudio.gif"],
     scroll: ["/images/studioscroll1920.svg", "/images/designsystemtemp.svg"],
   },
 ];

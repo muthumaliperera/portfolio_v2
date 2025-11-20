@@ -126,17 +126,47 @@ const AboutMe: React.FC<AboutMeProps> = ({ onScrollUp, onScrollHome }) => {
           </div>
 
           {/* Email section */}
-          <div className="mt-4">
-            <div className="inline-flex items-center border border-white rounded-full px-4 py-2">
+          <div className="mt-4 ">
+            <div className="inline-flex items-center ">
               <img
-                src="/images/email.png"
+                src="/images/email.svg"
                 alt="Email"
-                className="w-5 h-5 mr-3"
+                className="w-9 h-9  mr-1"
               />
               <span className="font-afacad text-white text-lg">
                 udwasanamuthumaliperera@gmail.com
               </span>
             </div>
+            <a
+              href="https://www.behance.net/wasanamuthumali"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center ml-6 cursor-pointer hover:opacity-80 transition-opacity"
+            >
+              <img
+                src="/images/behanceIcon.svg"
+                alt="behance"
+                className="w-9 h-9 mr-1"
+              />
+              <span className="font-afacad text-white text-lg">
+                wasanamuthumali
+              </span>
+            </a>
+            <a
+              href="https://dribbble.com/MuthuPerera"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center ml-6 cursor-pointer hover:opacity-80 transition-opacity"
+            >
+              <img
+                src="/images/dribbleIcon.svg"
+                alt="behance"
+                className="w-9 h-9 mr-1"
+              />
+              <span className="font-afacad text-white text-lg">
+                MuthuPerera
+              </span>
+            </a>
           </div>
         </div>
 
