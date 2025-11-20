@@ -44,7 +44,7 @@ const SAMPLE: Project[] = [
     desc: "Concept sample screens.",
     category: "samples",
     images: ["/images/std1.png", "/images/MonumentStudio.gif"],
-    scroll: ["/images/studioscroll1920.svg", "/images/designsystemtemp.svg"],
+    scroll: ["/images/full 1920.png", "/images/designsystemtemp.svg"],
   },
 ];
 
