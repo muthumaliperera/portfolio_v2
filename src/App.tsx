@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import AboutMe from './components/AboutMe'
 import HeroSection from './components/HeroSection'
 import LoadingPage from './components/LoadingPage'
-import Work from './components/Work'
 import SampleWork from './components/SampleWork'
+import Work from './components/Work'
 import WorkProcess from './components/WorkProcess'
-import AboutMe from './components/AboutMe'
 
 type View = 'hero' | 'work' | 'sampleWork' | 'workProcess' | 'aboutMe'
 
@@ -24,6 +24,55 @@ function App() {
 
     return () => clearTimeout(timer)
   }, [])
+
+  useEffect(() => {
+    let lastScrollTime = 0
+    const scrollThreshold = 1000 // Minimum time between scrolls in ms
+
+    const handleWheel = (e: WheelEvent) => {
+      if (isAnimating || showLoading) return
+      
+      const now = Date.now()
+      if (now - lastScrollTime < scrollThreshold) return
+      
+      // Detect scroll direction
+      const isScrollingDown = e.deltaY > 0
+      const isScrollingUp = e.deltaY < 0
+      
+      // Handle vertical scroll navigation (skip sampleWork in vertical flow)
+      if (isScrollingDown) {
+        // Navigate down
+        if (currentPageIndex === 0) {
+          handleNavigation('work')
+          lastScrollTime = now
+        } else if (currentPageIndex === 1) {
+          handleNavigation('workProcess')
+          lastScrollTime = now
+        } else if (currentPageIndex === 3) {
+          handleNavigation('aboutMe')
+          lastScrollTime = now
+        }
+      } else if (isScrollingUp) {
+        // Navigate up
+        if (currentPageIndex === 1) {
+          handleNavigation('hero')
+          lastScrollTime = now
+        } else if (currentPageIndex === 3) {
+          handleNavigation('work')
+          lastScrollTime = now
+        } else if (currentPageIndex === 4) {
+          handleNavigation('workProcess')
+          lastScrollTime = now
+        }
+      }
+    }
+
+    window.addEventListener('wheel', handleWheel, { passive: true })
+    
+    return () => {
+      window.removeEventListener('wheel', handleWheel)
+    }
+  }, [currentPageIndex, isAnimating, showLoading])
 
   const handleNavigation = (targetView: View) => {
     const targetIndex = pages.indexOf(targetView)

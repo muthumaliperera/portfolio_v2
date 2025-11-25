@@ -42,20 +42,36 @@ export default function Work({
   const [isDragging, setIsDragging] = React.useState(false);
   const [startX, setStartX] = React.useState(0);
   const [scrollLeft, setScrollLeft] = React.useState(0);
+  const [currentIndex, setCurrentIndex] = React.useState(0);
+  const [isMobile, setIsMobile] = React.useState(false);
 
-  // Handle horizontal scroll with mouse wheel
+  // Detect screen size
+  React.useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 640); // sm breakpoint
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // Handle horizontal scroll with mouse wheel (only on mobile)
   React.useEffect(() => {
     const container = scrollContainerRef.current;
     if (!container) return;
 
     const handleWheel = (e: WheelEvent) => {
-      if (Math.abs(e.deltaY) > 0) {
+      // Only allow wheel scroll on mobile
+      if (isMobile && Math.abs(e.deltaY) > 0) {
         e.preventDefault();
         container.scrollLeft += e.deltaY + e.deltaX;
       }
     };
 
     const handleMouseDown = (e: MouseEvent) => {
+      if (!isMobile) return; // Only allow drag on mobile
       setIsDragging(true);
       setStartX(e.pageX - container.offsetLeft);
       setScrollLeft(container.scrollLeft);
@@ -66,7 +82,7 @@ export default function Work({
     const handleMouseLeave = () => {
       setIsDragging(false);
       if (container) {
-        container.style.cursor = "grab";
+        container.style.cursor = isMobile ? "grab" : "default";
         container.style.removeProperty("user-select");
       }
     };
@@ -74,16 +90,16 @@ export default function Work({
     const handleMouseUp = () => {
       setIsDragging(false);
       if (container) {
-        container.style.cursor = "grab";
+        container.style.cursor = isMobile ? "grab" : "default";
         container.style.removeProperty("user-select");
       }
     };
 
     const handleMouseMove = (e: MouseEvent) => {
-      if (!isDragging) return;
+      if (!isDragging || !isMobile) return;
       e.preventDefault();
       const x = e.pageX - container.offsetLeft;
-      const walk = (x - startX) * 1.5; // Scroll multiplier
+      const walk = (x - startX) * 1.5;
       container.scrollLeft = scrollLeft - walk;
     };
 
@@ -100,7 +116,30 @@ export default function Work({
       container.removeEventListener("mouseup", handleMouseUp);
       container.removeEventListener("mousemove", handleMouseMove);
     };
-  }, [isDragging, scrollLeft, startX]);
+  }, [isDragging, scrollLeft, startX, isMobile]);
+
+  // Arrow navigation functions
+  const scrollToProject = (index: number) => {
+    const container = scrollContainerRef.current;
+    if (!container) return;
+
+    const projectWidth = container.scrollWidth / projects.length;
+    container.scrollTo({
+      left: projectWidth * index,
+      behavior: "smooth",
+    });
+    setCurrentIndex(index);
+  };
+
+  const handlePrevProject = () => {
+    const newIndex = currentIndex > 0 ? currentIndex - 1 : projects.length - 1;
+    scrollToProject(newIndex);
+  };
+
+  const handleNextProject = () => {
+    const newIndex = currentIndex < projects.length - 1 ? currentIndex + 1 : 0;
+    scrollToProject(newIndex);
+  };
 
   return (
     <section className="w-full bg-black text-white">
@@ -145,7 +184,6 @@ export default function Work({
           </div>
 
           {/* Samples subtitle */}
-
           <button
             onClick={onNavigateToSamples}
             className="mt-2 sm:mt-8 text-white hover:text-gray-300 transition-colors duration-300 cursor-pointer group border border-white px-4 py-2"
@@ -177,10 +215,34 @@ export default function Work({
       <div className="mt-6 sm:mt-8 lg:mt-4 h-px w-full bg-white/10" />
 
       {/* Projects horizontal scroll with its own margins */}
-      <div className="w-full mt-6 sm:mt-8 mb-14 px-5">
+      <div className="w-full mt-6 sm:mt-8 mb-14 px-5 relative">
+        {/* Left Arrow - hidden on mobile */}
+        {!isMobile && (
+          <button
+            onClick={handlePrevProject}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full p-3 transition-all duration-300"
+            aria-label="Previous project"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </button>
+        )}
+
         <div
           ref={scrollContainerRef}
-          className="w-full overflow-x-auto no-scrollbar pb-4 cursor-grab active:cursor-grabbing"
+          className={`w-full overflow-x-auto no-scrollbar pb-4 ${
+            isMobile ? "cursor-grab active:cursor-grabbing" : ""
+          }`}
         >
           <div
             className="inline-flex gap-5 lg:gap-6 w-max"
@@ -224,6 +286,46 @@ export default function Work({
             ))}
           </div>
         </div>
+
+        {/* Right Arrow - hidden on mobile */}
+        {!isMobile && (
+          <button
+            onClick={handleNextProject}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/10 hover:bg-white/20 backdrop-blur-sm rounded-full p-3 transition-all duration-300"
+            aria-label="Next project"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </button>
+        )}
+
+        {/* Dot indicators - hidden on mobile */}
+        {!isMobile && (
+          <div className="flex justify-center gap-2 mt-6">
+            {projects.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => scrollToProject(index)}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  index === currentIndex
+                    ? "bg-white w-8"
+                    : "bg-white/30 hover:bg-white/50"
+                }`}
+                aria-label={`Go to project ${index + 1}`}
+              />
+            ))}
+          </div>
+        )}
       </div>
 
       {/* Bottom section - positioned at bottom with proper margins */}
