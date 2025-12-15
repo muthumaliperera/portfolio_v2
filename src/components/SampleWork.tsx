@@ -46,6 +46,13 @@ const SAMPLE: Project[] = [
     images: ["/images/std1.png", "/images/MonumentStudio.gif"],
     scroll: ["/images/full 1920.png", "/images/designsystemtemp.svg"],
   },
+  {
+    id: "p5",
+    title: "Elvyn Dashboard",
+    desc: "Ongoing...",
+    category: "samples",
+    images: ["/images/Elvyn_Dashboard.png"],
+  },
 ];
 
 // Helper function to check if file is a video
