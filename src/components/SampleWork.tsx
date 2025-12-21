@@ -51,7 +51,14 @@ const SAMPLE: Project[] = [
     title: "Elvyn Dashboard",
     desc: "Ongoing...",
     category: "samples",
-    images: ["/images/Elvyn_Dashboard.png"],
+    images: ["/images/Elvyn_Dashboard.png", "/images/Elvyn_Dashboard2.png"],
+  },
+  {
+    id: "p6",
+    title: "Health Connect",
+    desc: "Ongoing...",
+    category: "samples",
+    images: ["/images/HealthCOnnect.png"],
   },
 ];
 
