@@ -58,7 +58,7 @@ const SAMPLE: Project[] = [
     title: "Health Connect",
     desc: "Ongoing...",
     category: "samples",
-    images: ["/images/HealthCOnnect.png"],
+    images: ["/images/HealthCOnnect.png", "/images/HealthCOnnect2ongoing.png"],
   },
 ];
 
