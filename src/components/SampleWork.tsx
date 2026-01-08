@@ -49,16 +49,21 @@ const SAMPLE: Project[] = [
   {
     id: "p5",
     title: "Elvyn Dashboard",
-    desc: "Ongoing...",
+    desc: "E-commerce Dashboard",
     category: "samples",
     images: ["/images/Elvyn_Dashboard.png", "/images/Elvyn_Dashboard2.png"],
   },
   {
     id: "p6",
     title: "Health Connect",
-    desc: "Ongoing...",
+    desc: "Healthcare management mobile application",
     category: "samples",
-    images: ["/images/HealthCOnnect.png", "/images/HealthCOnnect2ongoing.png"],
+    images: ["/images/HealthConnect1.jpg"],
+    scroll: [
+      "/images/HealthConnect - wireframes.png",
+      "/images/HealthConnect - Design.png",
+      "/images/HealthConnect2.svg",
+    ],
   },
 ];
 
