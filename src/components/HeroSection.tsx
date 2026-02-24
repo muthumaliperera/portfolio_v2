@@ -66,7 +66,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onScrollDown }) => {
             onMouseLeave={(e) => {
               e.currentTarget.style.backgroundColor = "transparent";
             }}
-          />
+          />,
         );
       }
     }
@@ -254,7 +254,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onScrollDown }) => {
               onClick={() =>
                 window.open(
                   "/Wasana Perera - Associate UI Designer_fig.pdf",
-                  "_blank"
+                  "_blank",
                 )
               }
             >

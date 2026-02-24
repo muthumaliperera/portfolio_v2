@@ -67,52 +67,13 @@ const AboutMe: React.FC<AboutMeProps> = ({ onScrollUp, onScrollHome }) => {
         }}
       />
 
-      {/* Grid box fills */}
-      <div className="absolute inset-0  " style={{ margin: "20px" }}>
-        {/* Image fills entire 2nd and 3rd rows */}
-        <div
-          className="absolute rounded-xl overflow-hidden hidden lg:block "
-          style={{
-            left: "10%", // Start of 1st column
-            top: "20%", // Start of 2nd row
-            width: "60%", // Full width (all columns)
-            height: "55%", // Height of 2nd and 3rd rows
-          }}
-        >
-          <img
-            src="/images/img.gif"
-            alt="About Me"
-            className="w-full h-full object-cover"
-          />
-        </div>
-      </div>
-      {/* Grid box fills */}
-      <div className="absolute inset-0  " style={{ margin: "20px" }}>
-        {/* Image fills entire 2nd and 3rd rows */}
-        <div
-          className="absolute rounded-xl overflow-hidden lg:hidden "
-          style={{
-            left: "0%", // Start of 1st column
-            top: "25%", // Start of 2nd row
-            width: "100%", // Full width (all columns)
-            height: "35%", // Height of 2nd and 3rd rows
-          }}
-        >
-          <img
-            src="/images/img.gif"
-            alt="About Me"
-            className="w-full h-full object-cover"
-          />
-        </div>
-      </div>
-
       {/* Main content container with 20px margin */}
       <div
         className="relative z-10 h-screen flex flex-col"
         style={{ margin: "20px" }}
       >
         {/* Top section - Title and Email */}
-        <div className="flex-1 flex flex-col lg:flex-row justify-start pt-10 lg:gap-4">
+        <div className="flex-1 flex flex-col md:flex-row justify-start md:justify-between pt-10 lg:gap-4">
           <div className="flex items-start justify-between">
             {/* Left side - Title */}
             <div className="flex items-baseline">
@@ -133,100 +94,108 @@ const AboutMe: React.FC<AboutMeProps> = ({ onScrollUp, onScrollHome }) => {
                 alt="Email"
                 className="w-9 h-9  mr-1"
               />
-              <span className="font-afacad text-white text-lg">
+              <span className="font-afacad text-white text-lg lg:text-xl">
                 udwasanamuthumaliperera@gmail.com
               </span>
             </div>
             <a
-              href="https://www.behance.net/wasanamuthumali"
+              href="https://pixelplay-designs.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center ml-6 cursor-pointer hover:opacity-80 transition-opacity"
             >
               <img
-                src="/images/behanceIcon.svg"
+                src="/images/pixlogo_icon.svg"
                 alt="behance"
                 className="w-9 h-9 mr-1"
               />
-              <span className="font-afacad text-white text-lg">
-                wasanamuthumali
-              </span>
-            </a>
-            <a
-              href="https://dribbble.com/MuthuPerera"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center ml-6 cursor-pointer hover:opacity-80 transition-opacity"
-            >
-              <img
-                src="/images/dribbleIcon.svg"
-                alt="behance"
-                className="w-9 h-9 mr-1"
-              />
-              <span className="font-afacad text-white text-lg">
-                MuthuPerera
+              <span className="font-afacad text-white text-lg lg:text-xl">
+                Pixel Play Designs
               </span>
             </a>
           </div>
         </div>
 
         {/* Bottom section - Professional details */}
-        <div className="pb-20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div className="pb-20 ">
+          <div className="flex flex-col gap-6">
             {/* About */}
-            <div className="space-y-2 flex gap-2 items-center">
+            <div className="space-y-2 flex flex-col gap-2 items-start bg-white/5 p-4 backdrop-blur-lg">
               <div className="bg-neutral-800 rounded-full h-fit px-4 py-2 inline-block">
                 <span className="font-afacad text-white text-md  font-semibold">
                   ABOUT
                 </span>
               </div>
-              <p className="font-agdasima text-white text-2xl lg:text-3xl">
-                WASANA MUTHUMALI PERERA, FREELANCE PRODUCT DESIGNER
+              <p className=" text-white text-md md:text-lg ">
+                I’m a dedicated UI designer and the creative designer of my own
+                design startup "PixelPlay", focused on creating meaningful and
+                user-centered digital experiences. With hands-on industry
+                experience, I specialize in UI/UX design, branding, and graphic
+                design solutions that combine creativity with strategic
+                thinking. My approach blends aesthetics with functionality,
+                ensuring every design is visually compelling, intuitive, and
+                aligned with business goals. Through PixelPlay, I work with
+                individuals, startups, and growing businesses to build strong
+                digital identities and impactful user experiences. I’m also
+                deeply interested in vector illustration, currently studying and
+                consistently practicing to refine my skills and expand my
+                creative expression.
               </p>
             </div>
 
-            {/* Education */}
-            <div className="space-y-2 flex gap-2 items-center">
-              <div className="bg-neutral-800 rounded-full px-4 py-2 inline-block">
-                <span className="font-afacad text-white text-md font-semibold">
-                  EDUCATION
-                </span>
+            <div className="grid grid-cols-2 lg:grid-cols-4  gap-6">
+              {/* Education */}
+              <div className="space-y-2 flex flex-col gap-2 items-start bg-white/5 p-4 backdrop-blur-lg">
+                <div className="bg-neutral-800 rounded-full px-4 py-2 inline-block">
+                  <span className="font-afacad text-white text-md font-semibold">
+                    EDUCATION
+                  </span>
+                </div>
+                <div className="space-y-1">
+                  <p className=" text-white text-md">
+                    • BSC.HONS SOFTWARE ENGINEERING •
+                  </p>
+                  <p className=" text-white text-md">
+                    ✰ 2nd Class Upper Division
+                  </p>
+                  <p className=" text-white text-md">
+                    NSBM Green University (2021-2025)
+                  </p>
+                </div>
               </div>
-              <p className="font-agdasima text-white text-2xl">
-                BSC.HONS SOFTWARE ENGINEERING (NSBM GREEN UNIVERSITY)
-              </p>
-            </div>
+              {/* Tags */}
+              <div className="space-y-2  flex flex-col gap-2 items-start bg-white/5 p-4 backdrop-blur-lg">
+                <div className="bg-neutral-800 rounded-full px-4 py-2 inline-block">
+                  <span className="font-afacad text-white text-md font-semibold">
+                    TAGS
+                  </span>
+                </div>
+                <p className=" text-white text-md md:text-lg">
+                  ✦ UI Designer ✦ UX Strategy ✦ Branding Design ✦ Digital
+                  Experiences ✦ PixelPlay Founder
+                </p>
+              </div>
+              {/* Category */}
+              <div className="space-y-2 flex flex-col gap-2 items-start bg-white/5 p-4 backdrop-blur-lg">
+                <div className="bg-neutral-800 rounded-full px-4 py-2 inline-block">
+                  <span className="font-afacad text-white text-md font-semibold">
+                    CATEGORY
+                  </span>
+                </div>
+                <p className=" text-white text-md md:text-lg">
+                  ✧ UI/UX Design ✧ GRAPHIC Design
+                </p>
+              </div>
 
-            {/* Category */}
-            <div className="space-y-2 flex gap-2 items-center">
-              <div className="bg-neutral-800 rounded-full px-4 py-2 inline-block">
-                <span className="font-afacad text-white text-md font-semibold">
-                  CATEGORY
-                </span>
+              {/* Experience */}
+              <div className="space-y-2 flex flex-col gap-2 items-start bg-white/5 p-4 backdrop-blur-lg">
+                <div className="bg-neutral-800 rounded-full px-4 py-2 inline-block">
+                  <span className="font-afacad text-white text-md font-semibold">
+                    EXPERIENCE
+                  </span>
+                </div>
+                <p className=" text-white text-md md:text-lg">✯ 2+ Years</p>
               </div>
-              <p className="font-agdasima text-white text-2xl">UI/UX DESIGN</p>
-            </div>
-
-            {/* Experience */}
-            <div className="space-y-2 flex gap-2 items-center">
-              <div className="bg-neutral-800 rounded-full px-4 py-2 inline-block">
-                <span className="font-afacad text-white text-md font-semibold">
-                  EXPERIENCE
-                </span>
-              </div>
-              <p className="font-agdasima text-white text-2xl">1+ YEARS</p>
-            </div>
-
-            {/* Tags */}
-            <div className="space-y-2  flex gap-2 items-center">
-              <div className="bg-neutral-800 rounded-full px-4 py-2 inline-block">
-                <span className="font-afacad text-white text-md font-semibold">
-                  TAGS
-                </span>
-              </div>
-              <p className="font-agdasima text-white text-2xl">
-                CREATIVE, RESPONSIVE DESIGNS, PROTOTYPES
-              </p>
             </div>
           </div>
         </div>

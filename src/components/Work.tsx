@@ -196,7 +196,7 @@ export default function Work({
             }}
           >
             <span className="relative  flex items-center gap-1 ">
-              SAMPLES
+              FEATURED WORK
               <span className="absolute bottom-0 left-0 w-0 h-px bg-white group-hover:w-full transition-all duration-300 ease-out"></span>
               <span className="  duration-300">
                 <img

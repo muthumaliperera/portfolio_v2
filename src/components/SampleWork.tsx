@@ -65,6 +65,43 @@ const SAMPLE: Project[] = [
       "/images/HealthConnect2.svg",
     ],
   },
+  {
+    id: "p7",
+    title: "Auto Track",
+    desc: "A clean, responsive dashboard enabling small vehicle service businesses to manage vehicles, track payments, and understand daily operations quickly, easily.",
+    category: "samples",
+    images: ["/images/AutoTrack_cover (1).png"],
+    scroll: ["/images/AutoTrack_Case Study.png"],
+  },
+  {
+    id: "p8",
+    title: "Car Care App",
+    desc: "“CarCare” - Your Vehicle's Personal Assistant. A simple mobile app that keeps your car healthy and you stress-free. It tracks your vehicle's health, reminds you of upcoming maintenance, instantly decodes warning lights, and stores all your car documents in one place.",
+    category: "samples",
+    images: ["/images/CarCare_Cover.png"],
+    scroll: ["/images/CarCareCase Study Template_ PixelPlay.png"],
+  },
+  // Graphic Design projects — add your own here
+  {
+    id: "g1",
+    title: "BubblyCrumbs",
+    desc: "Social Media Post Graphics",
+    category: "graphics",
+    images: [
+      "/images/Graphic/BubblyCrumbs/Post 1 temp.png",
+      "/images/Graphic/BubblyCrumbs/post2.png",
+      "/images/Graphic/BubblyCrumbs/Post 3.png",
+      "/images/Graphic/BubblyCrumbs/post 4.png",
+    ],
+  },
+  {
+    id: "g2",
+    title: "TrustPay",
+    desc: "Branding and Promotional Graphics",
+    category: "graphics",
+    images: ["/images/Graphic/TrustPay/Cover.png"],
+    scroll: ["/images/Graphic/TrustPay/TrustPayScroll.png"],
+  },
 ];
 
 // Helper function to check if file is a video
@@ -73,7 +110,17 @@ function isVideo(src: string): boolean {
   return videoExtensions.some((ext) => src.toLowerCase().endsWith(ext));
 }
 
-function Card({ p, onOpen }: { p: Project; onOpen: (p: Project) => void }) {
+type TabType = "uiux" | "graphics";
+
+function Card({
+  p,
+  onOpen,
+  square,
+}: {
+  p: Project;
+  onOpen: (p: Project) => void;
+  square?: boolean;
+}) {
   const firstMedia = p.images && p.images[0];
   const isFirstVideo = firstMedia ? isVideo(firstMedia) : false;
 
@@ -82,7 +129,11 @@ function Card({ p, onOpen }: { p: Project; onOpen: (p: Project) => void }) {
       onClick={() => onOpen(p)}
       className="group cursor-pointer transition flex flex-col"
     >
-      <div className="aspect-[16/9] w-full rounded-lg bg-white/10 mb-4 overflow-hidden">
+      <div
+        className={`${
+          square ? "aspect-square" : "aspect-[16/9]"
+        } w-full rounded-lg bg-white/10 mb-4 overflow-hidden`}
+      >
         {firstMedia ? (
           isFirstVideo ? (
             <video
@@ -99,7 +150,6 @@ function Card({ p, onOpen }: { p: Project; onOpen: (p: Project) => void }) {
               alt={p.title}
               className="w-full h-full object-cover"
               onError={(e) => {
-                // Fallback to placeholder if image fails to load
                 const target = e.target as HTMLImageElement;
                 target.src = "/images/placeholders/1.jpg";
               }}
@@ -128,13 +178,12 @@ function BottomViewer({
   const [index, setIndex] = useState(0);
   const open = !!project;
 
-  // Combine regular images and scroll images, filtering out duplicates
   const slides = project
     ? [
         ...project.images,
         ...(project.scroll
           ? project.scroll.filter(
-              (scrollImg) => !project.images.includes(scrollImg)
+              (scrollImg) => !project.images.includes(scrollImg),
             )
           : []),
       ]
@@ -145,7 +194,6 @@ function BottomViewer({
   const isScrollableShowcase = project?.scroll?.includes(src) ?? false;
   const isCurrentVideo = isVideo(src);
 
-  // Freeze background scroll when modal is open
   useEffect(() => {
     if (!open) return;
     const prev = document.body.style.overflow;
@@ -155,7 +203,6 @@ function BottomViewer({
     };
   }, [open]);
 
-  // Keyboard navigation when modal is open
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
@@ -223,7 +270,7 @@ function BottomViewer({
                 <img
                   src="/images/back.svg"
                   alt="Back"
-                  className="w-10 h-10 bg-black/40 rounded-full hover:bg-white/10  duration-300 "
+                  className="w-10 h-10 bg-black/40 rounded-full hover:bg-white/10 duration-300"
                   draggable={false}
                 />
               </button>
@@ -279,7 +326,7 @@ function BottomViewer({
                     <img
                       src={src}
                       alt="project image"
-                      className="h-full w-auto object-contain   bg-black"
+                      className="h-full w-auto object-contain bg-black"
                       draggable={false}
                     />
                   )
@@ -294,17 +341,16 @@ function BottomViewer({
               <button
                 aria-label="Next image"
                 onClick={next}
-                className="absolute right-0 top-1/2 -translate-y-1/2 "
+                className="absolute right-0 top-1/2 -translate-y-1/2"
               >
                 <img
                   src="/images/next.svg"
                   alt="next"
-                  className="w-10 h-10 bg-black/40 rounded-full hover:bg-white/10  duration-300 "
+                  className="w-10 h-10 bg-black/40 rounded-full hover:bg-white/10 duration-300"
                   draggable={false}
                 />
               </button>
             )}
-            {/* Slide index indicator */}
             {total > 1 && (
               <div className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-black/60 text-white text-sm">
                 {index + 1} / {total}
@@ -319,13 +365,18 @@ function BottomViewer({
 
 export default function SampleWork({ onBackToWork }: SampleWorkProps) {
   const [active, setActive] = useState<Project | null>(null);
+  const [tab, setTab] = useState<TabType>("uiux");
+
+  const uiuxProjects = SAMPLE.filter((p) => p.category !== "graphics");
+  const graphicsProjects = SAMPLE.filter((p) => p.category === "graphics");
+  const visibleProjects = tab === "uiux" ? uiuxProjects : graphicsProjects;
 
   return (
     <section className="w-full h-screen bg-black text-white relative">
       {/* Back Navigation Button */}
       <button
         onClick={onBackToWork}
-        className="absolute top-8 left-8 z-50 "
+        className="absolute top-8 left-8 z-50"
         aria-label="Back to Work"
       >
         <img
@@ -339,18 +390,55 @@ export default function SampleWork({ onBackToWork }: SampleWorkProps) {
       {/* Main Content */}
       <main className="pt-24 md:pt-28 lg:pt-32 px-4 sm:px-6 lg:px-8 h-full overflow-y-auto">
         <section className="w-full">
-          {/* Title Section */}
+          {/* Title + Tabs Row */}
           <div className="mb-8">
-            <h1 className="text-4xl md:text-6xl lg:text-8xl font-afacad font-bold text-white mb-4">
-              SAMPLE WORK
-            </h1>
-            <div className="h-px w-full bg-white opacity-10"></div>
+            <div className="flex items-center gap-8 flex-wrap justify-between">
+              <h1 className="text-4xl md:text-6xl lg:text-8xl font-afacad font-bold text-white leading-none">
+                FEATURED WORK
+              </h1>
+
+              {/* Tabs */}
+              <div className="flex items-center gap-1 mb-1 md:mb-2 lg:mb-3 bg-white/5 border border-white/10 rounded-full p-1">
+                <button
+                  onClick={() => setTab("uiux")}
+                  className={`px-4 py-1.5 rounded-full text-lg md:text-2xl lg:text-3xl font-medium transition-all duration-200 ${
+                    tab === "uiux"
+                      ? "bg-white text-black"
+                      : "text-white/60 hover:text-white"
+                  }`}
+                >
+                  UI/UX Design
+                </button>
+                <button
+                  onClick={() => setTab("graphics")}
+                  className={`px-4 py-1.5 rounded-full text-lg md:text-2xl lg:text-3xl font-medium transition-all duration-200 ${
+                    tab === "graphics"
+                      ? "bg-white text-black"
+                      : "text-white/60 hover:text-white"
+                  }`}
+                >
+                  Graphic Design
+                </button>
+              </div>
+            </div>
+            <div className="h-px w-full bg-white opacity-10 mt-4"></div>
           </div>
 
           {/* Grid */}
-          <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {SAMPLE.map((p) => (
-              <Card key={p.id} p={p} onOpen={setActive} />
+          <div
+            className={`mt-6 grid gap-6 ${
+              tab === "graphics"
+                ? "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 "
+                : "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+            }`}
+          >
+            {visibleProjects.map((p) => (
+              <Card
+                key={p.id}
+                p={p}
+                onOpen={setActive}
+                square={tab === "graphics"}
+              />
             ))}
           </div>
         </section>
