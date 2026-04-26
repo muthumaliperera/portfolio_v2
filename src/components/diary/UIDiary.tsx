@@ -24,11 +24,9 @@ export default function UIDiary({
             className="font-afacad font-bold leading-none tracking-tight select-none"
             style={{ fontSize: "clamp(72px, 11vw, 160px)" }}
           >
-            UI DIARY
+            Incoming..
           </h1>
-          <p className="font-agdasima text-white/40 text-xl tracking-widest mb-3">
-            EVENTS & MOMENTS
-          </p>
+          <p className="font-agdasima text-white/40 text-xl tracking-widest mb-3"></p>
         </div>
       </div>
 
