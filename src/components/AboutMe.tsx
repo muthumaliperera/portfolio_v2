@@ -98,7 +98,8 @@ const AboutMe: React.FC<AboutMeProps> = ({ onScrollUp, onScrollHome }) => {
                 udwasanamuthumaliperera@gmail.com
               </span>
             </div>
-            <a
+
+            {/*<a
               href="https://pixelplay-designs.vercel.app/"
               target="_blank"
               rel="noopener noreferrer"
@@ -112,7 +113,7 @@ const AboutMe: React.FC<AboutMeProps> = ({ onScrollUp, onScrollHome }) => {
               <span className="font-afacad text-white text-lg lg:text-xl">
                 Pixel Play Designs
               </span>
-            </a>
+            </a>*/}
           </div>
         </div>
 
@@ -127,17 +128,14 @@ const AboutMe: React.FC<AboutMeProps> = ({ onScrollUp, onScrollHome }) => {
                 </span>
               </div>
               <p className=" text-white text-md md:text-lg ">
-                I’m a dedicated UI designer and the creative designer of my own
-                design startup "PixelPlay", focused on creating meaningful and
-                user-centered digital experiences. With hands-on industry
-                experience, I specialize in UI/UX design, branding, and graphic
-                design solutions that combine creativity with strategic
-                thinking. My approach blends aesthetics with functionality,
-                ensuring every design is visually compelling, intuitive, and
-                aligned with business goals. Through PixelPlay, I work with
-                individuals, startups, and growing businesses to build strong
-                digital identities and impactful user experiences. I’m also
-                deeply interested in vector illustration, currently studying and
+                I’m a dedicated UI designer and the creative designer focused on
+                creating meaningful and user-centered digital experiences. With
+                hands-on industry experience, I specialize in UI/UX design,
+                branding, and graphic design solutions that combine creativity
+                with strategic thinking. My approach blends aesthetics with
+                functionality, ensuring every design is visually compelling,
+                intuitive, and aligned with business goals. I’m also deeply
+                interested in vector illustration, currently studying and
                 consistently practicing to refine my skills and expand my
                 creative expression.
               </p>

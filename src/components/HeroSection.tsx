@@ -1,48 +1,42 @@
 import React, { useEffect, useState } from "react";
+import LatestUpdates from "./updates/LatestUpdates";
 
 type HeroSectionProps = {
   onScrollDown?: () => void;
+  onNavigate?: (view: string, id?: string) => void;
 };
 
-const HeroSection: React.FC<HeroSectionProps> = ({ onScrollDown }) => {
-  // Glitch effect state
+const HeroSection: React.FC<HeroSectionProps> = ({
+  onScrollDown,
+  onNavigate,
+}) => {
   const [isGlitching, setIsGlitching] = useState(false);
   const [glitchKey, setGlitchKey] = useState(0);
 
-  // Glitch effect function
   const triggerGlitch = () => {
     setIsGlitching(true);
     setGlitchKey((prev) => prev + 1);
-
-    // Reset glitch after 200ms
-    setTimeout(() => {
-      setIsGlitching(false);
-    }, 200);
+    setTimeout(() => setIsGlitching(false), 200);
   };
 
-  // Set up recurring glitch intervals
   useEffect(() => {
     const scheduleNextGlitch = () => {
-      const randomDelay = Math.random() * 2000 + 3000; // 3-5 seconds
+      const randomDelay = Math.random() * 2000 + 3000;
       setTimeout(() => {
         triggerGlitch();
-        scheduleNextGlitch(); // Schedule next glitch
+        scheduleNextGlitch();
       }, randomDelay);
     };
 
-    // Start first glitch after initial delay
-    const initialDelay = Math.random() * 2000 + 3000; // 3-5 seconds
+    const initialDelay = Math.random() * 2000 + 3000;
     const initialTimeout = setTimeout(() => {
       triggerGlitch();
       scheduleNextGlitch();
     }, initialDelay);
 
-    return () => {
-      clearTimeout(initialTimeout);
-    };
+    return () => clearTimeout(initialTimeout);
   }, []);
 
-  // Generate grid cells for hover effect
   const generateGridCells = () => {
     const cells = [];
     for (let row = 0; row < 4; row++) {
@@ -75,7 +69,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onScrollDown }) => {
 
   return (
     <div className="relative h-screen bg-black overflow-hidden z-[1]">
-      {/* Grid cell hover layer - positioned before grid lines */}
+      {/* Latest Updates popup */}
+      {onNavigate && <LatestUpdates onNavigate={onNavigate} />}
+
+      {/* Grid cell hover layer */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{ margin: "20px", zIndex: 25 }}
@@ -83,9 +80,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onScrollDown }) => {
         {generateGridCells()}
       </div>
 
-      {/* Grid overlay - 5 columns, 4 rows with 20px margin */}
+      {/* Grid overlay */}
       <div className="absolute inset-0" style={{ margin: "20px", zIndex: 20 }}>
-        {/* Vertical lines - 6 lines for 5 columns */}
         <div
           className="absolute w-px h-full bg-white opacity-10"
           style={{ left: "0px" }}
@@ -110,8 +106,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onScrollDown }) => {
           className="absolute w-px h-full bg-white opacity-10"
           style={{ right: "0px" }}
         ></div>
-
-        {/* Horizontal lines - 5 lines for 4 rows */}
         <div
           className="absolute h-px w-full bg-white opacity-10"
           style={{ top: "0px" }}
@@ -137,10 +131,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onScrollDown }) => {
       {/* Transparent box overlay */}
       <div
         className="absolute inset-0 pointer-events-none"
-        style={{
-          backgroundColor: "rgba(255, 255, 255, 0.07)",
-          zIndex: 30,
-        }}
+        style={{ backgroundColor: "rgba(255, 255, 255, 0.07)", zIndex: 30 }}
       />
 
       {/* Grid box fills */}
@@ -148,15 +139,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onScrollDown }) => {
         className="absolute inset-0 pointer-events-none"
         style={{ margin: "20px", zIndex: 40 }}
       >
-        {/* Portrait in 2nd row, 3rd column (center box) */}
+        {/* Portrait — 2nd row, 3rd column */}
         <div
           className="absolute overflow-hidden"
-          style={{
-            left: "40%", // Start of 3rd column
-            top: "25%", // Start of 2nd row
-            width: "20%", // Width of one column
-            height: "25%", // Height of one row
-          }}
+          style={{ left: "40%", top: "25%", width: "20%", height: "25%" }}
         >
           <img
             src="/images/hero_img.svg"
@@ -165,60 +151,57 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onScrollDown }) => {
           />
         </div>
 
-        {/* 2nd column, 1st row box */}
+        {/* 2nd column, 1st row */}
         <div
           className="absolute"
           style={{
-            left: "20%", // Start of 2nd column
-            top: "0%", // Start of 1st row
-            width: "20%", // Width of one column
-            height: "25%", // Height of one row
+            left: "20%",
+            top: "0%",
+            width: "20%",
+            height: "25%",
             backgroundColor: "rgba(255, 255, 255, 0.1)",
           }}
-        ></div>
+        />
 
-        {/* 4th column, 1st row box */}
+        {/* 4th column, 1st row */}
         <div
           className="absolute"
           style={{
-            left: "60%", // Start of 4th column
-            top: "0%", // Start of 1st row
-            width: "20%", // Width of one column
-            height: "25%", // Height of one row
+            left: "60%",
+            top: "0%",
+            width: "20%",
+            height: "25%",
             backgroundColor: "rgba(255, 255, 255, 0.1)",
           }}
-        ></div>
+        />
 
-        {/* 5th column, 3rd row box */}
+        {/* 5th column, 3rd row */}
         <div
           className="absolute"
           style={{
-            left: "80%", // Start of 5th column
-            top: "50%", // Start of 3rd row
-            width: "20%", // Width of one column
-            height: "25%", // Height of one row
+            left: "80%",
+            top: "50%",
+            width: "20%",
+            height: "25%",
             backgroundColor: "rgba(255, 255, 255, 0.1)",
           }}
-        ></div>
+        />
       </div>
 
-      {/* Main content container with 20px margin - no scroll */}
+      {/* Main content */}
       <div
         className="relative h-screen flex flex-col pointer-events-none"
         style={{ margin: "20px", zIndex: 50 }}
       >
-        {/* Center section - Name and Portrait */}
+        {/* Center — Name and Portrait */}
         <div className="flex items-center justify-center relative flex-1">
           <div
             className="flex flex-col items-center sm:items-end justify-center relative gap-10"
             style={{ transform: "translateY(80%)" }}
           >
-            {/* UI/UX DESIGNER text with glitch effect */}
             <p
               key={glitchKey}
-              className={`text-3xl md:text-4xl lg:text-5xl font-agdasima text-white z-20 relative ${
-                isGlitching ? "glitch-active" : ""
-              }`}
+              className={`text-3xl md:text-4xl lg:text-5xl font-agdasima text-white z-20 relative ${isGlitching ? "glitch-active" : ""}`}
               style={{
                 transformOrigin: "center",
                 transition: isGlitching ? "none" : "all 0.1s ease-out",
@@ -227,22 +210,18 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onScrollDown }) => {
               UI/UX DESIGNER
             </p>
 
-            {/* WASANA PERERA text - centered and responsive */}
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-buljirya text-white leading-none text-center relative z-10 whitespace-nowrap tracking-tighter">
               WASANA PERERA
             </h1>
           </div>
         </div>
 
-        {/* Bottom section - positioned at bottom with proper margins */}
+        {/* Bottom */}
         <div
           className="flex justify-between items-end mx-5"
-          style={{
-            marginBottom: "55px",
-            minHeight: "fit-content",
-          }}
+          style={{ marginBottom: "55px", minHeight: "fit-content" }}
         >
-          {/* Left side - Tagline and Resume button */}
+          {/* Left — Tagline and Resume */}
           <div className="max-w-full">
             <p className="text-white font-agdasima text-2xl md:text-3xl lg:text-4xl mb-4 leading-relaxed">
               NO PIXEL WITHOUT PURPOSE, CRAFTED INTERFACE LANGUAGE
@@ -263,7 +242,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onScrollDown }) => {
             </button>
           </div>
 
-          {/* Right side - Scroll arrow */}
+          {/* Right — Scroll arrow */}
           <button
             type="button"
             onClick={onScrollDown}

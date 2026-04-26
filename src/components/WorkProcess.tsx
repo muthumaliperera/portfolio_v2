@@ -10,19 +10,19 @@ const steps = [
     number: "01",
     title: "RESEARCH",
     description:
-      "DIVING DEEP INTO USER BEHAVIOR, MARKET GAPS, AND BUSINESS GOALS. I DON'T ASSUME—I UNCOVER. EVERY INSIGHT BECOMES AMMUNITION FOR WHAT COMES NEXT.",
+      "Diving deep into user behavior, market gaps, and business goals. I don't assume I uncover. Every insight becomes ammunition for what comes next.",
   },
   {
     number: "02",
     title: "PLAN",
     description:
-      "TRANSFORMING DATA INTO DIRECTION. MAPPING USER JOURNEYS, DEFINING PROBLEMS WORTH SOLVING, AND ARCHITECTING SOLUTIONS THAT DON'T JUST WORK—THEY RESONATE.",
+      "Transforming data into directions. Mapping user journeys, defining problems worth solving, and architecting solutions that don't just work, they resonate.",
   },
   {
     number: "03",
     title: "DESIGN",
     description:
-      "WHERE STRATEGY TAKES FORM. CRAFTING INTERFACES THAT FEEL INTUITIVE, LOOK SHARP, AND CREATE EXPERIENCES USERS DON'T JUST USE—THEY REMEMBER.",
+      "Where strategy takes form. Crafting interfaces that feel intuitive, look sharp, and create experiences users don't just use they remember.",
   },
 ];
 
@@ -41,7 +41,7 @@ const WorkProcess: React.FC<WorkProcessProps> = ({
           }
         });
       },
-      { threshold: 0.2 }
+      { threshold: 0.2 },
     );
 
     itemRefs.current.forEach((el) => el && observer.observe(el));
@@ -72,7 +72,7 @@ const WorkProcess: React.FC<WorkProcessProps> = ({
               <div className="mt-3 font-afacad text-5xl sm:text-6xl font-extrabold tracking-tight">
                 {s.title}
               </div>
-              <p className="mt-6 font-agdasima text-2xl leading-7 tracking-wide opacity-90">
+              <p className="mt-6 font-afacad text-xl leading-tight opacity-90">
                 {s.description}
               </p>
             </div>

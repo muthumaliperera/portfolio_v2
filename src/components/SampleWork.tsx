@@ -254,7 +254,7 @@ function BottomViewer({
             </div>
             <button
               onClick={onClose}
-              className="h-10 w-10 rounded-full border border-white/20 hover:bg-white/10"
+              className="h-10 w-10 mr-20 rounded-full border border-white/20 hover:bg-white/10"
             >
               ✕
             </button>
