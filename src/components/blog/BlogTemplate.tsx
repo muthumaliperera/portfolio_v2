@@ -40,7 +40,7 @@ export default function BlogTemplate({
       {/* Scrollable body */}
       <div className="flex justify-center  overflow-y-auto">
         <div
-          className="max-w-2xl flex-1 "
+          className="max-w-3xl flex-1 "
           style={{ marginLeft: 20, marginRight: 20 }}
         >
           {/* Title block */}
@@ -62,7 +62,7 @@ export default function BlogTemplate({
           {/* Hero image — 4:1 ratio */}
           <div
             className="w-full overflow-hidden mb-10"
-            style={{ aspectRatio: "4/1" }}
+            style={{ aspectRatio: "4/2" }}
           >
             <img
               src={post.image}

@@ -218,44 +218,46 @@ const HeroSection: React.FC<HeroSectionProps> = ({
 
         {/* Bottom */}
         <div
-          className="flex justify-between items-end mx-5"
+          className="flex justify-between items-end ml-5"
           style={{ marginBottom: "55px", minHeight: "fit-content" }}
         >
           {/* Left — Tagline and Resume */}
           <div className="max-w-full">
-            <p className="text-white font-agdasima text-2xl md:text-3xl lg:text-4xl mb-4 leading-relaxed">
-              NO PIXEL WITHOUT PURPOSE, CRAFTED INTERFACE LANGUAGE
-              <br />
-              THAT RESONATES.
-            </p>
+            <div className="w-2/3">
+              <p className="text-white font-afacad text-xl md:text-3xl lg:text-4xl mb-4 leading-relaxed">
+                NO PIXEL WITHOUT PURPOSE, CRAFTED INTERFACE LANGUAGE THAT
+                RESONATES.
+              </p>
+              <button
+                className="border-2 border-white px-10 py-4 rounded-sm font-afacad text-white hover:bg-white hover:text-black transition-colors duration-300 flex items-center gap-3 text-xl font-semibold pointer-events-auto"
+                onClick={() =>
+                  window.open(
+                    "/Wasana Perera - Associate UI Designer_fig.pdf",
+                    "_blank",
+                  )
+                }
+              >
+                RESUME
+                <span className="text-2xl">↗</span>
+              </button>
+            </div>
+          </div>
+          <div className="w-24 flex justify-end">
+            {/* Right — Scroll arrow */}
             <button
-              className="border-2 border-white px-10 py-4 rounded-sm font-afacad text-white hover:bg-white hover:text-black transition-colors duration-300 flex items-center gap-3 text-xl font-semibold pointer-events-auto"
-              onClick={() =>
-                window.open(
-                  "/Wasana Perera - Associate UI Designer_fig.pdf",
-                  "_blank",
-                )
-              }
+              type="button"
+              onClick={onScrollDown}
+              aria-label="Go to work section"
+              className="text-white text-4xl transition-transform hover:translate-y-1 focus:translate-y-1 outline-none pointer-events-auto"
             >
-              RESUME
-              <span className="text-2xl">↗</span>
+              <img
+                src="/images/arrow-down.png"
+                alt="Scroll down"
+                className="w-12 h-12 cursor-pointer select-none"
+                draggable={false}
+              />
             </button>
           </div>
-
-          {/* Right — Scroll arrow */}
-          <button
-            type="button"
-            onClick={onScrollDown}
-            aria-label="Go to work section"
-            className="text-white text-4xl transition-transform hover:translate-y-1 focus:translate-y-1 outline-none pointer-events-auto"
-          >
-            <img
-              src="/images/arrow-down.png"
-              alt="Scroll down"
-              className="w-12 h-12 cursor-pointer select-none"
-              draggable={false}
-            />
-          </button>
         </div>
       </div>
     </div>

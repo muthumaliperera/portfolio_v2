@@ -173,10 +173,10 @@ export default function Work({
                   HIGHLIGHTS
                 </span>
               </div>
-              <div className="mt-4 sm:mt-5 font-agdasima text-3xl  leading-snug opacity-90 space-y-1.5">
+              <div className="mt-4 sm:mt-5 font-afacad text-3xl   opacity-90 space-y-1.5">
                 <p>FROM 2024–2025 (1+ YEARS)</p>
                 <p>
-                  15+ PROJECTS COLLABORATED WITH{" "}
+                  15+ Projects Collaborated with{" "}
                   <span className="font-semibold">WISE SOFT LABS</span>
                 </p>
               </div>
