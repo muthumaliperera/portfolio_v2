@@ -10,14 +10,14 @@ export default function LatestUpdates({ onNavigate }: LatestUpdatesProps) {
 
   return (
     <div
-      className="fixed top-6 left-1/2 max-w-8xl z-[100] flex flex-col sm:flex-row gap-3 justify-center  "
+      className="fixed top-16 left-1/2 w-full z-[100] flex flex-col sm:flex-row gap-3 justify-center  px-4"
       style={{ transform: "translateX(-50%)", pointerEvents: "auto" }}
     >
       {resolved.map((item, i) => (
         <button
           key={i}
           onClick={() => onNavigate(item.navigateTo, item.entryId)}
-          className="group flex items-center gap-3 bg-black/80 border border-white/10 backdrop-blur-md px-3 py-2 hover:border-white/30 transition-all duration-300 sm:w-1/2 w-full "
+          className="group flex items-center gap-3 bg-black/80 border border-white/10 backdrop-blur-md px-3 py-2 hover:border-white/30 transition-all duration-300 sm:w-1/3 w-full "
         >
           <div
             className="shrink-0 overflow-hidden bg-white/5"

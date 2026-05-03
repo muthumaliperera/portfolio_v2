@@ -141,8 +141,19 @@ const HeroSection: React.FC<HeroSectionProps> = ({
       >
         {/* Portrait — 2nd row, 3rd column */}
         <div
-          className="absolute overflow-hidden"
+          className="absolute overflow-hidden hidden sm:block"
           style={{ left: "40%", top: "25%", width: "20%", height: "25%" }}
+        >
+          <img
+            src="/images/hero_img.svg"
+            alt="Wasana Perera"
+            className="w-full h-full object-cover"
+          />
+        </div>
+        {/* Portrait — 3rd row, 3rd column */}
+        <div
+          className="absolute overflow-hidden sm:hidden"
+          style={{ left: "40%", top: "40%", width: "20%", height: "25%" }}
         >
           <img
             src="/images/hero_img.svg"
@@ -194,7 +205,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
         style={{ margin: "20px", zIndex: 50 }}
       >
         {/* Center — Name and Portrait */}
-        <div className="flex items-center justify-center relative flex-1">
+        <div className="flex items-center justify-center relative flex-1 top-28 sm:top-0">
           <div
             className="flex flex-col items-center sm:items-end justify-center relative gap-10"
             style={{ transform: "translateY(80%)" }}
